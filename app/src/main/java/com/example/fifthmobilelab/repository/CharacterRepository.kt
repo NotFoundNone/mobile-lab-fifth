@@ -1,24 +1,22 @@
-package com.example.mobilelab.repository
+package com.example.fifthmobilelab.repository
 
-import com.example.mobilelab.model.Character
-import io.ktor.client.HttpClient
-import io.ktor.client.plugins.ClientRequestException
-import io.ktor.client.request.get
-import io.ktor.client.statement.HttpResponse
-import io.ktor.client.statement.bodyAsText
-import kotlinx.serialization.json.Json
+import android.util.Log
+import com.example.fifthmobilelab.dao.CharacterDao
+import com.example.fifthmobilelab.entity.CharacterEntity
 
-class CharacterRepository(private val client: HttpClient) {
+class CharacterRepository(private val characterDao: CharacterDao) {
 
-    private val json = Json { ignoreUnknownKeys = true }
+    val charactersFlow: kotlinx.coroutines.flow.Flow<List<CharacterEntity>> = characterDao.getAllCharactersFlow()
 
-    suspend fun getCharacters(page: Int): List<Character> {
-        val url = "https://anapioficeandfire.com/api/characters?page=$page&pageSize=50"
-        return try {
-            val response: HttpResponse = client.get(url)
-            json.decodeFromString(response.bodyAsText())
-        } catch (e: ClientRequestException) {
-            emptyList()
-        }
+    suspend fun insertCharacters(characters: List<CharacterEntity>) {
+        characterDao.insertCharacters(characters)
+    }
+
+    suspend fun getAllCharacters(): List<CharacterEntity> {
+        return characterDao.getAllCharacters()
+    }
+
+    suspend fun clearCharacters() {
+        characterDao.clearCharacters()
     }
 }
