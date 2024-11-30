@@ -1,12 +1,11 @@
 package com.example.mobilelab
 
-
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobilelab.databinding.ItemCharacterBinding
 
-class CharacterAdapter(private val characters: List<com.example.mobilelab.model.Character>) : RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>() {
+class CharacterAdapter(private var characters: List<com.example.mobilelab.model.Character>) : RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
         val binding = ItemCharacterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -18,6 +17,11 @@ class CharacterAdapter(private val characters: List<com.example.mobilelab.model.
     }
 
     override fun getItemCount() = characters.size
+
+    fun updateData(newCharacters: List<com.example.mobilelab.model.Character>) {
+        characters = newCharacters
+        notifyDataSetChanged()
+    }
 
     class CharacterViewHolder(private val binding: ItemCharacterBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(character: com.example.mobilelab.model.Character) {

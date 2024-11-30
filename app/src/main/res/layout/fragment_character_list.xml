@@ -3,44 +3,92 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="?android:attr/windowBackground">
+    android:background="?android:attr/windowBackground"
+    android:padding="16dp">
 
-    <!-- Заголовок с названием "Герои" -->
+    <!-- Заголовок с названием "Персонажи" -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Персонажи"
-        android:textSize="24sp"
-        android:textStyle="bold"
         android:gravity="center"
-        android:padding="16dp"
-        android:textColor="@android:color/black" />
+        android:padding="10dp"
+        android:text="Персонажи"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <!-- RecyclerView для отображения списка персонажей -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="104dp"
         android:layout_weight="1"
-        android:padding="8dp"
         android:clipToPadding="false"
+        android:padding="8dp"
         android:scrollbars="vertical" />
 
-    <!-- BottomNavigationView для перехода между фрагментами -->
+    <!-- Блок управления с кнопками -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="?android:attr/windowBackground">
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="8dp">
 
-        <Button
-            android:id="@+id/btnSettings"
+        <!-- Поле ввода номера страницы и кнопка загрузки -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Настройки"
-            android:layout_margin="8dp"
-            android:padding="8dp" />
+            android:gravity="center"
+            android:orientation="horizontal">
 
+            <EditText
+                android:id="@+id/etPageNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_background"
+                android:hint="Введите номер страницы"
+                android:inputType="number"
+                android:padding="8dp" />
+
+            <Button
+                android:id="@+id/btnLoadPage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:padding="8dp"
+                android:text="Загрузить" />
+        </LinearLayout>
+
+        <!-- Кнопки "Обновить" и "Настройки" -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnRefresh"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:padding="8dp"
+                android:text="Обновить" />
+
+            <Button
+                android:id="@+id/btnSettings"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="8dp"
+                android:text="Настройки" />
+        </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>
