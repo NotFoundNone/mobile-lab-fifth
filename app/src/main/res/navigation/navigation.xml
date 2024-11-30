@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/onboardFragment">
+
+    <fragment
+        android:id="@+id/onboardFragment"
+        android:name="com.example.mobilelab.fragments.OnboardFragment"
+        android:label="Onboarding"
+        tools:layout="@layout/onboard_fragment">
+        <action
+            android:id="@+id/action_onboardFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.mobilelab.fragments.RegisterFragment"
+        android:label="Register"
+        tools:layout="@layout/register_fragment">
+        <action
+            android:id="@+id/action_registerFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
+
+<!--    <fragment-->
+<!--        android:id="@+id/signInFragment"-->
+<!--        android:name="com.example.mobilelab.fragments.SignInFragment"-->
+<!--        android:label="Sign In"-->
+<!--        tools:layout="@layout/sign_in_fragment">-->
+<!--        <argument-->
+<!--            android:name="LOGIN"-->
+<!--            app:argType="string" />-->
+<!--        <argument-->
+<!--            android:name="PASSWORD"-->
+<!--            app:argType="string" />-->
+<!--        <action-->
+<!--            android:id="@+id/action_signInFragment_to_chatListFragment"-->
+<!--            app:destination="@id/chatListFragment" />-->
+<!--    </fragment>-->
+
+        <fragment
+            android:id="@+id/signInFragment"
+            android:name="com.example.mobilelab.fragments.SignInFragment"
+            android:label="Sign In"
+            tools:layout="@layout/sign_in_fragment">
+            <argument
+                android:name="LOGIN"
+                app:argType="string" />
+            <argument
+                android:name="PASSWORD"
+                app:argType="string" />
+            <action
+                android:id="@+id/action_signInFragment_to_charactersFragment"
+                app:destination="@id/characterFragment" />
+        </fragment>
+
+    <fragment
+        android:id="@+id/characterFragment"
+        android:name="com.example.mobilelab.fragments.CharacterFragment"
+        android:label="Characters List"
+        tools:layout="@layout/fragment_character_list">
+        <argument
+            android:name="LOGIN"
+            app:argType="string" />
+    </fragment>
+
+<!--    <fragment-->
+<!--        android:id="@+id/chatListFragment"-->
+<!--        android:name="com.example.mobilelab.fragments.ChatListFragment"-->
+<!--        android:label="Chat List"-->
+<!--        tools:layout="@layout/chat_list_fragment">-->
+<!--        <argument-->
+<!--            android:name="LOGIN"-->
+<!--            app:argType="string" />-->
+<!--    </fragment>-->
+
+</navigation>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/onboard_image"
+        android:layout_width="265dp"
+        android:layout_height="320dp"
+        android:src="@drawable/img" />
+
+    <TextView
+        style="@style/CustomEditText"
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to MESG"
+        android:textSize="40sp"
+        android:fontFamily="@font/font"
+        android:textColor="#7A8689"/>
+
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="223dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/button_background"
+        android:text="Sign In"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+</LinearLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <!-- Primary color for the app -->
+    <color name="colorPrimary">#007BFF</color>
+    <!-- Variant of the primary color -->
+    <color name="colorPrimaryVariant">#2342DD</color>
+    <!-- On-primary text color -->
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <!-- Background color -->
+    <color name="colorBackground">#F5F5F5</color>
+    <!-- Surface color (used for card backgrounds, etc.) -->
+    <color name="colorSurface">#FFFFFF</color>
+    <!-- Text color for input fields -->
+    <color name="colorText">#000000</color>
+    <!-- Border color for input fields -->
+    <color name="colorBorder">#DDDDDD</color>
+
+
+</resources>
