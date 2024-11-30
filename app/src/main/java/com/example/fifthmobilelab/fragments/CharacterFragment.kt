@@ -1,13 +1,20 @@
-package com.example.mobilelab.fragments
+package com.example.fifthmobilelab.fragments
 
+import android.content.ContentValues
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mobilelab.CharacterAdapter
+import com.example.mobilelab.R
 import com.example.mobilelab.databinding.FragmentCharacterListBinding
+import com.example.mobilelab.model.Character
 import com.example.mobilelab.repository.CharacterRepository
 import io.ktor.client.HttpClient
 import kotlinx.coroutines.*
@@ -32,19 +39,60 @@ class CharacterFragment : Fragment() {
         adapter = CharacterAdapter(emptyList()) // Пустой список для инициализации
         binding.recyclerView.adapter = adapter
 
+        // Переход в настройки при нажатии на кнопку
+        binding.btnSettings.setOnClickListener {
+            findNavController().navigate(R.id.action_charactersFragment_to_settingsFragment)
+        }
+
+
         // Затем начинаем загрузку данных
         fetchCharacters()
     }
 
+
     private fun fetchCharacters() {
         CoroutineScope(Dispatchers.IO).launch {
-            val characters = repository.getCharacters(page = 5)
-            withContext(Dispatchers.Main) {
-                adapter = CharacterAdapter(characters) // Обновляем адаптер новыми данными
-                binding.recyclerView.adapter = adapter // Устанавливаем адаптер с данными
+            try {
+                val characters = repository.getCharacters(page = 5)
+                withContext(Dispatchers.Main) {
+                    adapter = CharacterAdapter(characters) // Обновляем адаптер новыми данными
+                    binding.recyclerView.adapter = adapter // Устанавливаем адаптер с данными
+
+                    saveCharactersToFile(characters, "5.txt")
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                withContext(Dispatchers.Main) {
+                    if (isAdded) { // Проверяем, что фрагмент всё ещё активен
+                        Toast.makeText(requireContext(), "Ошибка: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
     }
+
+    private fun saveCharactersToFile(characters: List<Character>, fileName: String) {
+        try {
+            val contentResolver = requireContext().contentResolver
+            val contentValues = ContentValues().apply {
+                put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
+                put(MediaStore.MediaColumns.MIME_TYPE, "text/plain")
+                put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS) // Сохраняем в /Downloads
+            }
+
+            val uri = contentResolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues)
+            uri?.let {
+                contentResolver.openOutputStream(it)?.use { outputStream ->
+                    outputStream.write(characters.joinToString("\n") { it.toString() }.toByteArray())
+                    Toast.makeText(context, "Файл сохранён в /Downloads", Toast.LENGTH_SHORT).show()
+                } ?: Toast.makeText(context, "Ошибка открытия потока для записи", Toast.LENGTH_SHORT).show()
+            } ?: Toast.makeText(context, "Ошибка сохранения файла", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(context, "Ошибка: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

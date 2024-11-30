@@ -59,12 +59,15 @@
 
     <fragment
         android:id="@+id/characterFragment"
-        android:name="com.example.mobilelab.fragments.CharacterFragment"
+        android:name="com.example.fifthmobilelab.fragments.CharacterFragment"
         android:label="Characters List"
         tools:layout="@layout/fragment_character_list">
         <argument
             android:name="LOGIN"
             app:argType="string" />
+        <action
+            android:id="@+id/action_charactersFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
 
 <!--    <fragment-->
@@ -76,5 +79,12 @@
 <!--            android:name="LOGIN"-->
 <!--            app:argType="string" />-->
 <!--    </fragment>-->
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.fifthmobilelab.fragments.SettingsFragment"
+        android:label="Settings Fragment"
+        tools:layout="@layout/fragment_settings">
+    </fragment>
 
 </navigation>

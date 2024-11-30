@@ -57,6 +57,7 @@ dependencies {
 
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.cio)
+    implementation(libs.androidx.datastore.preferences)
 
     // Обновляем kotlinx-serialization-json до 1.6.0
     implementation(libs.kotlinx.serialization.json)
